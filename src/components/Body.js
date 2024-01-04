@@ -42,29 +42,33 @@ const Body=()=>{
     return allRestaurants.length===0 ?( <Shimmer/>):
     ( 
       <div className="body">
-          <div className="filter">
+          <div className="filter flex">
             
-            <div className="search">
-                <input type="text" className="search-box" value={searchText} 
+            <div className="search m-4 p-4">
+                <input type="text" className="border border-solid border-black" value={searchText} 
                   onChange={(e)=>{
                   setsearchText(e.target.value);
                 }}/>
-                <button onClick={()=>{
+                <button className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+                onClick={()=>{
                     //filter ther restaurant 
                     // console.log(searchText);
                    const fr= allRestaurants.filter((res)=> res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                    setFilteredRestaurant(fr);
                 }}>Search</button>
             </div>
+            <div className="search m-4 p-4 flex items-center">
+                <button className="px-4 py-2 bg-gray-100 rounded-lg " onClick={ ()=> {
+                    const fl= allRestaurants.filter(res=>  res.info.avgRating>4.0);
+                    console.log(fl);
+                    setFilteredRestaurant(fl);
+                } }>Top Rated Restaurants</button>
+            </div>
 
-            <button className="filter-btn" onClick={ ()=> {
-                const fl= allRestaurants.filter(res=>  res.info.avgRating>4.0);
-                console.log(fl);
-                setFilteredRestaurant(fl);
-            } }>Top Rated Restaurants</button>
+            
             </div>
            
-          <div className="res-container">
+          <div className="flex flex-wrap">
           {
               filteredRestaurant.map((each_restraurant)=>(
               <Link  to={"/restaurants/"+each_restraurant.info.id} key={each_restraurant.info.id}> <RestaurantCard  resData={each_restraurant}/></Link>

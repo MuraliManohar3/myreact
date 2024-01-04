@@ -13,6 +13,7 @@ import Contact from "./components/Contact";
 import Error from  "./components/Error";
 
 const Grocery=lazy(()=>import("./components/Grocery"));
+//
 const Body=()=>{
   return (
     <div className="body">
