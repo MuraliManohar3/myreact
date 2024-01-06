@@ -1,10 +1,11 @@
-import React,{lazy,Suspense} from "react";
+import React,{lazy,Suspense,useState, useEffect} from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
+import Header from "./components/header.js" ;
 import Body from "./components/Body";
 import RestaurantCard  from "./components/RestaurantCard";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About";
+import UserContext from "./utils/UserContext.js";
 // import Grocery from "./components/Grocery";
 
 import { createBrowserRouter,RouterProvider,Outlet } from "react-router-dom";
@@ -29,11 +30,27 @@ const Body=()=>{
   );
 };
 const AppLayout=()=>{
+    const [userName,setUserName] = useState();
+
+    //authentication
+    useEffect(()=>{
+        //make api call and send username and password
+        const data ={
+            name:"Murali"
+        };
+        setUserName(data.name);
+    },[]);
+
+
     return (
+        <UserContext.Provider value={{loggedInUser: userName,setUserName}}> 
+        {/* providing new value to the props and providing it to the whole application */}
         <div className="app">
             <Header/>
             <Outlet/>    {/*USING Outlet, children acc to routes come over here*/}
         </div>
+        </UserContext.Provider>
+            
     );
 };
 const appRouter= createBrowserRouter([
