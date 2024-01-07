@@ -29,3 +29,11 @@ import {Component} from "path";
 //ROUTING TYPES IN WEB APPS
 1.client side routing
 server side routing
+
+//REDUX TOOLKIT
+-Install  @reduxjs/tookit and react-redux
+Build our store
+Connect our store to our app
+Slice(cartSlice)
+dispatch(action)
+Selector

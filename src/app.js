@@ -1,17 +1,20 @@
 import React,{lazy,Suspense,useState, useEffect} from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/header.js" ;
+import Header from "./components/Header.js" ;
 import Body from "./components/Body";
 import RestaurantCard  from "./components/RestaurantCard";
 import RestaurantMenu from "./components/RestaurantMenu";
 import About from "./components/About";
+import Cart from "./components/Cart.js"
 import UserContext from "./utils/UserContext.js";
+import { Provider } from "react-redux";
 // import Grocery from "./components/Grocery";
 
 import { createBrowserRouter,RouterProvider,Outlet } from "react-router-dom";
 // outlet used for 
 import Contact from "./components/Contact";
 import Error from  "./components/Error";
+import appStore from "./utils/appStore.js";
 
 const Grocery=lazy(()=>import("./components/Grocery"));
 //
@@ -43,6 +46,7 @@ const AppLayout=()=>{
 
 
     return (
+        <Provider store={appStore}>
         <UserContext.Provider value={{loggedInUser: userName,setUserName}}> 
         {/* providing new value to the props and providing it to the whole application */}
         <div className="app">
@@ -50,6 +54,7 @@ const AppLayout=()=>{
             <Outlet/>    {/*USING Outlet, children acc to routes come over here*/}
         </div>
         </UserContext.Provider>
+        </Provider>
             
     );
 };
@@ -77,6 +82,10 @@ const appRouter= createBrowserRouter([
             {
                 path: "/restaurants/:resId",
                 element: <RestaurantMenu/>,
+            },
+            {
+                path: "/cart",
+                element: <Cart/>,
             },
            
         ],
