@@ -21,7 +21,7 @@ const Body=()=>{
         );
         const json= await data.json();
 
-        console.log(json);
+        // console.log(json);
         //optioinal chaining
         const data1 = json?.data?.cards?.filter(
             (rest) => (rest.card?.card?.id === "restaurant_grid_listing")
@@ -31,7 +31,7 @@ const Body=()=>{
         // setFilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setallRestaurants(data2);
         setFilteredRestaurant(data2);
-        console.log(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        // console.log(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         }catch(error)
         {
             console.error("Error fetching data:",error);
@@ -44,27 +44,35 @@ const Body=()=>{
     const {loggedInUser,setUserName} =useContext(UserContext);
 
     //conditional rendering -rendering on the basis of a condition
-    if(!allRestaurants) return null;
+    // if(!allRestaurants) return null;
     if(filteredRestaurant?.length===0) return <h1>No Restaurant Found</h1>
 
-    return allRestaurants.length===0 ?( <Shimmer/>):
+    return allRestaurants.length===0 ?( <Shimmer/>) :
     ( 
       <div className="body">
           <div className="filter flex">
             
             <div className="search m-4 p-4">
-                <input type="text" className="border border-solid border-black" value={searchText} 
+                <input type="text" 
+                data-testid="searchInput"
+                className="border border-solid border-black" value={searchText} 
                   onChange={(e)=>{
                   setsearchText(e.target.value);
                 }}/>
                 <button className="px-4 py-2 bg-green-100 m-4 rounded-lg"
                 onClick={()=>{
-                    //filter ther restaurant 
+                    //filter the restaurant 
                     // console.log(searchText);
                    const fr= allRestaurants.filter((res)=> res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                    setFilteredRestaurant(fr);
                 }}>Search
-                </button>
+                </button >
+                <button 
+                className="border-black px-4 py-2 bg-slate-200 text-red-500 text-2xl rounded-lg"
+                    onClick={()=>{
+                      const topRest= allRestaurants.filter((res)=> res.info.avgRating>4.3);
+                      setFilteredRestaurant(topRest);
+                    }}>Top rated Restaurants</button>
             </div>
             
             
@@ -95,8 +103,3 @@ const Body=()=>{
   };
 
   export default Body;
-
-//   resturantData.data.cards.filter(
-//     (rest) => rest.card?.card?.id === "restaurant_grid_listing"
-//   );
-

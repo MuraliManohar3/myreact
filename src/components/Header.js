@@ -20,7 +20,7 @@ const Header=()=>{
 // subscribing to the store using  a Selector
 //useSelector() hook gives us access to the store
 const cartItems= useSelector((store)=>store.cart.items);
-console.log(cartItems);
+// console.log(cartItems);
 
 
     return (
@@ -46,8 +46,7 @@ console.log(cartItems);
                         <Link to="/grocery"> Grocery</Link>
                     </li>
                     <li className="px-4 font-bold text-xl">
-                        <Link to="/cart"> Cart
-                         ({cartItems.length} items)
+                        <Link to="/cart">Cart ({cartItems.length} items)
                         </Link>
                     </li>
                     <button className="login" onClick={()=>{

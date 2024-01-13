@@ -37,3 +37,20 @@ Connect our store to our app
 Slice(cartSlice)
 dispatch(action)
 Selector
+
+//TESTING
+- UNIT TESTING (imp)
+-INTEGRATION TESTING(imp)
+- END TO END TESTING(as soon as user lands on the website and we test all flows )
+
+//setting up testing in our app
+-Install React Testing library
+-Installed jest
+-Installed Babel dependencies
+-Configure Babel
+-Configure Parcel config file to disable Babel transpilation
+-Jest Configuration - npx jest --init
+-Install jsdom library
+-Install @babel/preset-react - to make JSX work in test cases
+-Include @babel/preset-react inside my babel config
+-Install=>  npm i -D @testing-library/jest-dom

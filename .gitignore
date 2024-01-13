@@ -2,3 +2,4 @@
 /dist
 /food_ordering_app_using_react
 .parcel-cache
+/coverage

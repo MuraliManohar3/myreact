@@ -4,12 +4,14 @@ import { useContext  } from "react";
 import UserContext from "../utils/UserContext";
 const RestaurantCard=(props)=>{
     const { resData }=props;
+
+ 
     const {loggedInUser}= useContext(UserContext);
 
 
     const {cloudinaryImageId,name,avgRating,cuisines,costForTwo,deliveryTime}= resData?.info;
     return (
-        <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200" >
+        <div  data-testid="resCard" className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200" >
             <img className="rounded-lg" alt="murali"src=
             {
                CDN_URL +cloudinaryImageId
